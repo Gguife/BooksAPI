@@ -11,8 +11,8 @@ public class Author {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String name;
-    private int birthYear;
-    private int deathYear;
+    private Integer birthYear;
+    private Integer deathYear;
 
     @ManyToOne
     @JoinColumn(name = "book_id")
@@ -55,11 +55,11 @@ public class Author {
         return name;
     }
 
-    public int getBirthYear() {
+    public Integer getBirthYear() {
         return birthYear;
     }
 
-    public int getDeathYear() {
+    public Integer getDeathYear() {
         return deathYear;
     }
 
