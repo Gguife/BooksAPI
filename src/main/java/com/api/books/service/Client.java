@@ -108,13 +108,34 @@ public class Client {
     }
 
     private void listarAutoresVivos() {
+        authors = authorRepository.findAll();
+        List<Author> autoresVivos = authors.stream()
+                .filter(author -> author.getDeathYear() == null)
+                .toList();
 
+        if (autoresVivos.isEmpty()) {
+            System.out.println("Nenhum autor vivo encontrado.");
+        } else {
+            System.out.println("Autores vivos:");
+            autoresVivos.forEach(author -> System.out.println(author.getName()));
+        }
     }
 
     private void listarLivrosPorIdiomas() {
         System.out.println("Digite a sigla do idioma para procuro do livro: ");
         String lang = scanner.nextLine();
+        books = bookRepository.findAll();
 
+        List<Book> livrosNoIdioma = books.stream()
+                .filter(book -> book.getLanguage().contains(lang))
+                .toList();
+
+        if (livrosNoIdioma.isEmpty()) {
+            System.out.println("Nenhum livro encontrado para o idioma: " + lang);
+        } else {
+            System.out.println("Livros encontrados no idioma " + lang + ":");
+            livrosNoIdioma.forEach(book -> System.out.println(book.getTitle()));
+        }
     }
 
 }
